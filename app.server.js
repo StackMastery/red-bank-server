@@ -3,6 +3,8 @@ import dotenv from 'dotenv';
 import cors from 'cors';
 import { connectToDatabase } from './db/dbConnect.js';
 import { AuthRoutes } from './routes/auth.routes.js';
+import cookieParser from 'cookie-parser';
+
 
 // Load environment variables
 dotenv.config();
@@ -17,6 +19,7 @@ app.use(cors({
     credentials: true
 }));
 app.use(express.json());
+app.use(cookieParser())
 
 // Routes
 app.use('/api/auth', AuthRoutes);
