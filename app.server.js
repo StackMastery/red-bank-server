@@ -4,6 +4,7 @@ import cors from 'cors';
 import { connectToDatabase } from './db/dbConnect.js';
 import { AuthRoutes } from './routes/auth.routes.js';
 import cookieParser from 'cookie-parser';
+import { Routes } from './routes/Routes.js';
 
 
 // Load environment variables
@@ -23,6 +24,7 @@ app.use(cookieParser())
 
 // Routes
 app.use('/api/auth', AuthRoutes);
+app.use('/api', Routes)
 
 // Connect to Database 
 connectToDatabase()
