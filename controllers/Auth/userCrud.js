@@ -14,4 +14,28 @@ const UserDetails = async (req, res) => {
     }
 };
 
-export { UserDetails };
+const UserUpdate = async (req, res) => {
+    const { uid } = req.query
+    const {
+        name,
+        avatar,
+        bloodGroup,
+        district,
+        upazila,
+    } = req.body
+
+    const updatedUser = await UserModel.findOneAndUpdate(
+        {uid: uid},
+        { $set: {
+            name,
+            avatar,
+            bloodGroup, 
+            district, 
+            upazila
+        }}
+    )
+    res.send(updatedUser)
+}
+
+
+export { UserDetails , UserUpdate};
