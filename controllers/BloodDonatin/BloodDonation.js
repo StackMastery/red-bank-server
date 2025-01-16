@@ -55,4 +55,28 @@ const GetBLoodDonationReqDetails = async (req, res) => {
     }
 }
 
-export { GetBloodDonationForDonor , DeleteDonationReq, GetBLoodDonationReqDetails};
+const UpdateDonationRequest = async (req, res) => {
+    const { uid, id } = req.query;
+    
+    if (!id) {
+        return res.status(400).send({ error: 'Id is required' });
+    }
+
+    try {
+        const updatedDonation = await BloodDonation.findByIdAndUpdate(
+            id, 
+            { ...req.body },
+            { new: true }
+        );
+
+        if (!updatedDonation) {
+            return res.status(404).send({ error: 'Donation record not found' });
+        }
+
+        res.status(200).send(updatedDonation);
+    } catch (error) {
+        res.status(500).send({ error: 'Failed to update donation record', message: error.message });
+    }
+}
+
+export { GetBloodDonationForDonor , DeleteDonationReq, GetBLoodDonationReqDetails, UpdateDonationRequest};

@@ -44,7 +44,13 @@ const BloodDonationSchema = new mongoose.Schema({
     authorName:{
         type: String,
         required: true,
-    }
+    },
+    donorEmail:{
+        type: String,
+    },
+    donorName:{
+        type: String,
+    },
 },{
     timestamps: true
 });
