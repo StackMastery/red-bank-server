@@ -88,11 +88,13 @@ const PaginatedBloodDonation = async (req, res) => {
     }
 
     try {
-        const donations = await BloodDonation.find({authorEmail: req?.query?.email})
-            .skip((page - 1) * limit)
-            .limit(limit)
+        const query = req.query.email ? { authorEmail: req.query.email } : {};
 
-        const totalItems = await BloodDonation.countDocuments();
+        const donations = await BloodDonation.find(query)
+            .skip((page - 1) * limit)
+            .limit(limit);
+
+        const totalItems = await BloodDonation.countDocuments(query);
 
         res.json({
             totalItems,
@@ -103,6 +105,7 @@ const PaginatedBloodDonation = async (req, res) => {
     } catch (err) {
         res.status(500).json({ error: 'An error occurred' });
     }
-}
+};
+
 
 export { GetBloodDonationForDonor , DeleteDonationReq, GetBLoodDonationReqDetails, UpdateDonationRequest, PaginatedBloodDonation};

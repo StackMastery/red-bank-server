@@ -9,7 +9,7 @@ const CreateAccesToken = async (req, res) => {
         }
 
         // Create JWT token
-        const token = jwt.sign({ uid }, process.env.JWT_SECRET, { expiresIn: '1h' });  
+        const token = jwt.sign({ uid }, process.env.JWT_SECRET, { expiresIn: '10m' });  
 
         // Determine SameSite value based on environment
         const sameSiteValue = process.env.NODE_ENV === 'production' ? 'None' : 'Lax';

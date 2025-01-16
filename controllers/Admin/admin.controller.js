@@ -1,3 +1,4 @@
+import VerifyAdmin from "../../middlewares/verifyAdmin.js";
 import BloodDonation from "../../models/blooddDonation.model.js";
 import { UserModel } from "../../models/user.model.js";
 
@@ -6,11 +7,10 @@ const DashboardOverview = async (req, res) => {
 
     try {
 
-        const adminDetails = await UserModel.findOne({uid: uid})
+        const isAdmin = await VerifyAdmin(uid);
 
-        if(adminDetails?.role !== "admin"){
-            res.send({error: "Unautorized"}, 402)
-            return
+        if (!isAdmin) {
+            return res.status(403).send({ error: 'Unauthorized' });
         }
 
         const countTotalDonors = await UserModel.countDocuments({ role: 'donor' })
@@ -26,4 +26,43 @@ const DashboardOverview = async (req, res) => {
     }
 };
 
-export { DashboardOverview };
+
+const GetAllUserPaginated = async (req, res) => {
+    const page = parseInt(req.query?.page) || 1;
+    const limit = parseInt(req.query?.limit) || 10;
+
+    if (!page || !limit) {
+        return res.status(400).send({ error: "Page and limit required" });
+    }
+
+    try {
+        const query = {};
+        const search = req.query.search || ''; // Use the search query from the frontend
+
+        if (search) {
+            query.$or = [
+                { name: { $regex: search, $options: 'i' } },
+                { email: { $regex: search, $options: 'i' } }
+            ];
+        }
+
+        const users = await UserModel.find(query)
+            .skip((page - 1) * limit)
+            .limit(limit);
+
+        const totalItems = await UserModel.countDocuments(query);
+
+        res.json({
+            totalItems,
+            totalPages: Math.ceil(totalItems / limit),
+            currentPage: page,
+            users,
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'An error occurred' });
+    }
+};
+
+
+export { DashboardOverview, GetAllUserPaginated };
+

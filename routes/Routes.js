@@ -5,7 +5,8 @@ import { DeleteDonationReq, GetBloodDonationForDonor, GetBLoodDonationReqDetails
 import CreateNewUser from '../controllers/Auth/createNewUser.js'
 import { UserDetails, UserUpdate } from '../controllers/Auth/userCrud.js'
 import CreateAccesToken from '../controllers/Auth/createAccesToken.js'
-import { DashboardOverview } from '../controllers/Admin/admin.controller.js'
+import { DashboardOverview, GetAllUserPaginated } from '../controllers/Admin/admin.controller.js'
+import ClearCookie from '../controllers/Auth/clearCookie.js'
 
 const Routes = express.Router()
 
@@ -31,7 +32,11 @@ Routes.get('/auth/user', VerifyToken, UserDetails)
 // Update user
 Routes.patch('/auth/user/update', VerifyToken, UserUpdate)
 // Get Dashboard Overview
-Routes.get('/dashboard/overview/admin', DashboardOverview)
+Routes.get('/dashboard/overview/admin', VerifyToken, DashboardOverview)
+// Get all users for admin
+Routes.get('/dashboard/users/all', VerifyToken, GetAllUserPaginated)
+// Logout
+Routes.post(`/auth/logout`, ClearCookie)
 
 
 

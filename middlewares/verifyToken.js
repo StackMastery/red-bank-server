@@ -1,7 +1,7 @@
 import jwt from 'jsonwebtoken'
 
 const VerifyToken = (req, res, next) => {
-    const { accessToken } = req.cookies
+    const { accessToken } = req.cookies    
     const { uid } = req.query
 
     if(!accessToken && !uid){
@@ -12,7 +12,7 @@ const VerifyToken = (req, res, next) => {
     try{
         const decodedToken = jwt.decode(accessToken, process.env.JWT_SECRET)
 
-        if(decodedToken?.uid === uid){
+        if(decodedToken?.uid === uid){            
             return next()
         }else{
             res.send('Unautorized user', 400)
