@@ -5,6 +5,7 @@ import { DeleteDonationReq, GetBloodDonationForDonor, GetBLoodDonationReqDetails
 import CreateNewUser from '../controllers/Auth/createNewUser.js'
 import { UserDetails, UserUpdate } from '../controllers/Auth/userCrud.js'
 import CreateAccesToken from '../controllers/Auth/createAccesToken.js'
+import { DashboardOverview } from '../controllers/Admin/admin.controller.js'
 
 const Routes = express.Router()
 
@@ -29,6 +30,8 @@ Routes.post('/auth/create-token', CreateAccesToken)
 Routes.get('/auth/user', VerifyToken, UserDetails)
 // Update user
 Routes.patch('/auth/user/update', VerifyToken, UserUpdate)
+// Get Dashboard Overview
+Routes.get('/dashboard/overview/admin', DashboardOverview)
 
 
 

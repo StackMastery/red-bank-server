@@ -1,4 +1,5 @@
 import BloodDonation from "../../models/blooddDonation.model.js";
+import { UserModel } from "../../models/user.model.js";
 
 const CreateBloodDonation = async (req, res) => {
     const {
@@ -25,6 +26,13 @@ const CreateBloodDonation = async (req, res) => {
     }
 
     try {
+
+        const findUser = await UserModel.findOne({email: authorEmail})
+        
+        if(!findUser?.status){
+            res.send({error: "Must your account will be active"}, 400)
+        }
+
         const newDonation = new BloodDonation({
             authorEmail,
             authorName,
