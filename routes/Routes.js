@@ -2,6 +2,9 @@ import express from 'express'
 import VerifyToken from '../middlewares/verifyToken.js'
 import CreateBloodDonation from '../controllers/BloodDonatin/CreateBloodDonation.js'
 import { DeleteDonationReq, GetBloodDonationForDonor, GetBLoodDonationReqDetails, PaginatedBloodDonation, UpdateDonationRequest } from '../controllers/BloodDonatin/BloodDonation.js'
+import CreateNewUser from '../controllers/Auth/createNewUser.js'
+import { UserDetails, UserUpdate } from '../controllers/Auth/userCrud.js'
+import CreateAccesToken from '../controllers/Auth/createAccesToken.js'
 
 const Routes = express.Router()
 
@@ -18,6 +21,15 @@ Routes.delete(`/donation/delete`, VerifyToken, DeleteDonationReq)
 Routes.patch(`/donation/update`, VerifyToken, UpdateDonationRequest)
 // Donation Paginated 
 Routes.get('/donation/paginated', VerifyToken, PaginatedBloodDonation)
+// Create new user
+Routes.post('/auth/create-user', CreateNewUser)
+// Create Acces Token
+Routes.post('/auth/create-token', CreateAccesToken)
+// Get user details 
+Routes.get('/auth/user', VerifyToken, UserDetails)
+// Update user
+Routes.patch('/auth/user/update', VerifyToken, UserUpdate)
+
 
 
 export { Routes }
