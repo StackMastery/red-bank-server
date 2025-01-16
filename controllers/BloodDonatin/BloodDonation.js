@@ -79,4 +79,30 @@ const UpdateDonationRequest = async (req, res) => {
     }
 }
 
-export { GetBloodDonationForDonor , DeleteDonationReq, GetBLoodDonationReqDetails, UpdateDonationRequest};
+const PaginatedBloodDonation = async (req, res) => {
+    const page = parseInt(req.query.page) || 1;
+    const limit = parseInt(req.query.limit) || 10;
+
+    if (!page || !limit) {
+        return res.status(400).send({ error: "Page and limit required" });
+    }
+
+    try {
+        const donations = await BloodDonation.find({authorEmail: req?.query?.email})
+            .skip((page - 1) * limit)
+            .limit(limit)
+
+        const totalItems = await BloodDonation.countDocuments();
+
+        res.json({
+            totalItems,
+            totalPages: Math.ceil(totalItems / limit),
+            currentPage: page,
+            donations,
+        });
+    } catch (err) {
+        res.status(500).json({ error: 'An error occurred' });
+    }
+}
+
+export { GetBloodDonationForDonor , DeleteDonationReq, GetBLoodDonationReqDetails, UpdateDonationRequest, PaginatedBloodDonation};

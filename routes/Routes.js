@@ -1,7 +1,7 @@
 import express from 'express'
 import VerifyToken from '../middlewares/verifyToken.js'
 import CreateBloodDonation from '../controllers/BloodDonatin/CreateBloodDonation.js'
-import { DeleteDonationReq, GetBloodDonationForDonor, GetBLoodDonationReqDetails, UpdateDonationRequest } from '../controllers/BloodDonatin/BloodDonation.js'
+import { DeleteDonationReq, GetBloodDonationForDonor, GetBLoodDonationReqDetails, PaginatedBloodDonation, UpdateDonationRequest } from '../controllers/BloodDonatin/BloodDonation.js'
 
 const Routes = express.Router()
 
@@ -16,6 +16,8 @@ Routes.get(`/donation/details`, GetBLoodDonationReqDetails)
 Routes.delete(`/donation/delete`, VerifyToken, DeleteDonationReq)
 // Update Donation Request
 Routes.patch(`/donation/update`, VerifyToken, UpdateDonationRequest)
+// Donation Paginated 
+Routes.get('/donation/paginated', VerifyToken, PaginatedBloodDonation)
 
 
 export { Routes }
