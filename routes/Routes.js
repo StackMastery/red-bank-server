@@ -3,7 +3,7 @@ import VerifyToken from '../middlewares/verifyToken.js'
 import CreateBloodDonation from '../controllers/BloodDonatin/CreateBloodDonation.js'
 import { DeleteDonationReq, GetBloodDonationForDonor, GetBLoodDonationReqDetails, PaginatedBloodDonation, UpdateDonationRequest } from '../controllers/BloodDonatin/BloodDonation.js'
 import CreateNewUser from '../controllers/Auth/createNewUser.js'
-import { UpdateUserRole, UserDetails, UserUpdate } from '../controllers/Auth/userCrud.js'
+import { UpdateUserRole, UpdateUserStatus, UserDetails, UserUpdate } from '../controllers/Auth/userCrud.js'
 import CreateAccesToken from '../controllers/Auth/createAccesToken.js'
 import { DashboardOverview, GetAllUserPaginated } from '../controllers/Admin/admin.controller.js'
 import ClearCookie from '../controllers/Auth/clearCookie.js'
@@ -39,6 +39,8 @@ Routes.get('/dashboard/users/all', VerifyToken, GetAllUserPaginated)
 Routes.post(`/auth/logout`, ClearCookie)
 // update user role by admin
 Routes.patch('/auth/user/update/role', VerifyToken, UpdateUserRole)
+// update user status by admin
+Routes.patch('/auth/user/update/status', VerifyToken, UpdateUserStatus)
 
 
 export { Routes }

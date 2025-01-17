@@ -71,6 +71,38 @@ const UpdateUserRole = async (req, res) => {
     }
 }
 
+const UpdateUserStatus = async (req, res) => {
+    const { id, uid } = req.query;
+    const { status } = req.body;
+
+    if (!id || !status || !uid) {
+        return res.status(400).send({ error: 'Id, uid, and status are required' });
+    }
+
+    try {
+        const isAdmin = await VerifyAdmin(uid);
+
+        if (!isAdmin) {
+            return res.status(403).send({ error: 'Unauthorized' });
+        }
+
+        const updateStatus = await UserModel.findOneAndUpdate(
+            { _id: id },
+            { $set: { status: status } },
+            { new: true }
+        );
+
+        if (!updateStatus) {
+            return res.status(404).send({ error: 'User not found' });
+        }
+
+        res.send({ success: true });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).send({ error: 'Internal server error' });
+    }
+}
 
 
-export { UserDetails , UserUpdate, UpdateUserRole};
+export { UserDetails , UserUpdate, UpdateUserRole, UpdateUserStatus};
