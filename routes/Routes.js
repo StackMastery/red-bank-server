@@ -5,7 +5,7 @@ import { DeleteDonationReq, GetBloodDonationForDonor, GetBLoodDonationReqDetails
 import CreateNewUser from '../controllers/Auth/createNewUser.js'
 import { UpdateUserRole, UpdateUserStatus, UserDetails, UserUpdate } from '../controllers/Auth/userCrud.js'
 import CreateAccesToken from '../controllers/Auth/createAccesToken.js'
-import { DashboardOverview, GetAllUserPaginated } from '../controllers/Admin/admin.controller.js'
+import { DashboardOverview, GetAllDonationReqPaginated, GetAllUserPaginated } from '../controllers/Admin/admin.controller.js'
 import ClearCookie from '../controllers/Auth/clearCookie.js'
 
 const Routes = express.Router()
@@ -16,7 +16,7 @@ Routes.post(`/donation/create`, VerifyToken, CreateBloodDonation)
 // Get Blood donation Request with limit
 Routes.get(`/donation`, VerifyToken, GetBloodDonationForDonor)
 // Get Donation Details By Id
-Routes.get(`/donation/details`, GetBLoodDonationReqDetails)
+Routes.get(`/donation/details`, VerifyToken, GetBLoodDonationReqDetails)
 // Delete Blood donation request
 Routes.delete(`/donation/delete`, VerifyToken, DeleteDonationReq)
 // Update Donation Request
@@ -35,6 +35,8 @@ Routes.patch('/auth/user/update', VerifyToken, UserUpdate)
 Routes.get('/dashboard/overview/admin', VerifyToken, DashboardOverview)
 // Get all users for admin
 Routes.get('/dashboard/users/all', VerifyToken, GetAllUserPaginated)
+// Get all donation for admin
+Routes.get('/dashboard/donations/all', VerifyToken, GetAllDonationReqPaginated)
 // Logout
 Routes.post(`/auth/logout`, ClearCookie)
 // update user role by admin

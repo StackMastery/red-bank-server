@@ -4,6 +4,7 @@ import cors from 'cors';
 import { connectToDatabase } from './db/dbConnect.js';
 import cookieParser from 'cookie-parser';
 import { Routes } from './routes/Routes.js';
+import { VerifyOrigin } from './middlewares/verifyOrigin.js';
 
 
 // Load environment variables
@@ -20,6 +21,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(cookieParser())
+app.use(VerifyOrigin)
 
 // Routes
 app.use('/api', Routes)

@@ -1,3 +1,4 @@
+import VerifyAdmin from "../../middlewares/verifyAdmin.js";
 import BloodDonation from "../../models/blooddDonation.model.js";
 
 const GetBloodDonationForDonor = async (req, res) => {
@@ -39,19 +40,23 @@ const DeleteDonationReq = async (req, res) => {
 };
 
 const GetBLoodDonationReqDetails = async (req, res) => {
-    const { id } = req.query
-
-    if(!id){
-        res.send({error: "Must required uid"})
-        return
-    }
-
+    const { id, email, uid } = req.query
+    const isAdmin = await VerifyAdmin(uid)
     try{
-        const details = await BloodDonation.findById(id)
-        res.send(details)
-    }
-    catch(err){
+        const details = await BloodDonation.findById(id)        
+        if(isAdmin){
+            res.send(details)
+            return
+        }
 
+        if(details?.authorEmail === email){
+            res.send(details)
+            return
+        }
+        res.send({error: "unauthorized user"}, 402)
+    }    
+    catch(err){
+        res.send({error: 'Somethign went wrong'}, 400)
     }
 }
 
