@@ -9,6 +9,8 @@ import { DashboardOverview, GetAllDonationReqPaginated, GetAllUserPaginated } fr
 import ClearCookie from '../controllers/Auth/clearCookie.js'
 import VerifyPermalLink from '../controllers/Blog/verifyPermalLink.js'
 import CreateBlog from '../controllers/Blog/CreateBlog.js'
+import GetPostDetails from '../controllers/Blog/GetPostDetails.js'
+import UpdateBlog from '../controllers/Blog/UpdateBlog.js'
 
 const Routes = express.Router()
 
@@ -49,6 +51,10 @@ Routes.patch('/auth/user/update/status', VerifyToken, UpdateUserStatus)
 Routes.get('/auth/verify/permallink', VerifyPermalLink)
 // Create blog 
 Routes.post('/blog/create', VerifyToken, CreateBlog)
+// Get Single Blog post Data
+Routes.get('/blog/post/details', GetPostDetails)
+// Update Blog
+Routes.patch('/blog/post/update', UpdateBlog)
 
 
 export { Routes }

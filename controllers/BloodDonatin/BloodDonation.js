@@ -89,7 +89,8 @@ const PaginatedBloodDonation = async (req, res) => {
     const limit = parseInt(req.query.limit) || 10;
 
     if (!page || !limit) {
-        return res.status(400).send({ error: "Page and limit required" });
+        res.status(400).send({ error: "Page and limit required" });
+        return 
     }
 
     try {
