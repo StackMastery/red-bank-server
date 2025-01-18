@@ -3,28 +3,20 @@ import BloodDonation from "../../models/blooddDonation.model.js";
 import { UserModel } from "../../models/user.model.js";
 
 const DashboardOverview = async (req, res) => {
-    const { uid } = req.query;
-
+    const { uid } = req.query;    
     try {
-
-        const isAdmin = await VerifyAdmin(uid);
-
-        if (!isAdmin) {
-            return res.status(403).send({ error: 'Unauthorized' });
-        }
-
-        const countTotalDonors = await UserModel.countDocuments({ role: 'donor' })
-        const countDonationReq = await BloodDonation.countDocuments()
+        const countTotalDonors = await UserModel.countDocuments({ role: 'donor' });
+        const countDonationReq = await BloodDonation.countDocuments();
 
         res.status(200).send({ 
-            totalDonors: countTotalDonors ,
+            totalDonors: countTotalDonors,
             totalDonationReq: countDonationReq
         });
-
     } catch (err) {
         res.status(500).send({ error: 'An error occurred while counting' });
     }
 };
+
 
 
 const GetAllUserPaginated = async (req, res) => {
@@ -79,11 +71,6 @@ const GetAllDonationReqPaginated = async (req, res) => {
     }
 
     try {
-        const isAdmin = await VerifyAdmin(req.query?.uid);
-        if (!isAdmin) {
-            return res.status(403).send({ error: 'Unauthorized' });
-        }
-
         const donations = await BloodDonation.find()
             .skip((page - 1) * limit)
             .limit(limit)

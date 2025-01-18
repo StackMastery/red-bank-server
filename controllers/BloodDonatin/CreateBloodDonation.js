@@ -45,9 +45,9 @@ const CreateBloodDonation = async (req, res) => {
             recName,
             bloodGroupe,
         });
-        await newDonation.save();
+        const donation = await newDonation.save();
 
-        res.status(201).send('Blood donation record created successfully');
+        res.status(201).send(donation);
     } catch (error) {
         res.status(500).send('Server error: ' + error.message);
     }

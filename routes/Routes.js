@@ -7,6 +7,8 @@ import { UpdateUserRole, UpdateUserStatus, UserDetails, UserUpdate } from '../co
 import CreateAccesToken from '../controllers/Auth/createAccesToken.js'
 import { DashboardOverview, GetAllDonationReqPaginated, GetAllUserPaginated } from '../controllers/Admin/admin.controller.js'
 import ClearCookie from '../controllers/Auth/clearCookie.js'
+import VerifyPermalLink from '../controllers/Blog/verifyPermalLink.js'
+import CreateBlog from '../controllers/Blog/CreateBlog.js'
 
 const Routes = express.Router()
 
@@ -43,6 +45,10 @@ Routes.post(`/auth/logout`, ClearCookie)
 Routes.patch('/auth/user/update/role', VerifyToken, UpdateUserRole)
 // update user status by admin
 Routes.patch('/auth/user/update/status', VerifyToken, UpdateUserStatus)
+// Veify Blog permal Link
+Routes.get('/auth/verify/permallink', VerifyPermalLink)
+// Create blog 
+Routes.post('/blog/create', VerifyToken, CreateBlog)
 
 
 export { Routes }
