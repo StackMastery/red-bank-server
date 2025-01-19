@@ -13,6 +13,7 @@ import GetPostDetails from '../controllers/Blog/GetPostDetails.js'
 import UpdateBlog from '../controllers/Blog/UpdateBlog.js'
 import GetAllPostPaginated from '../controllers/Blog/GetAllPostPaginated.js'
 import DeletePost from '../controllers/Blog/DeletePost.js'
+import { GetAllStatus } from '../controllers/frontend/AllStatus.js'
 
 const Routes = express.Router()
 
@@ -61,6 +62,8 @@ Routes.patch('/blog/post/update', VerifyToken, UpdateBlog)
 Routes.get('/blogs/all/paginated', VerifyToken, GetAllPostPaginated)
 // Delete blog post by admin
 Routes.delete('/blog/delete', VerifyToken, DeletePost)
+// Get Status 
+Routes.get('/status/all', GetAllStatus)
 
 
 export { Routes }
