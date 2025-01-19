@@ -11,6 +11,8 @@ import VerifyPermalLink from '../controllers/Blog/verifyPermalLink.js'
 import CreateBlog from '../controllers/Blog/CreateBlog.js'
 import GetPostDetails from '../controllers/Blog/GetPostDetails.js'
 import UpdateBlog from '../controllers/Blog/UpdateBlog.js'
+import GetAllPostPaginated from '../controllers/Blog/GetAllPostPaginated.js'
+import DeletePost from '../controllers/Blog/DeletePost.js'
 
 const Routes = express.Router()
 
@@ -54,7 +56,11 @@ Routes.post('/blog/create', VerifyToken, CreateBlog)
 // Get Single Blog post Data
 Routes.get('/blog/post/details', GetPostDetails)
 // Update Blog
-Routes.patch('/blog/post/update', UpdateBlog)
+Routes.patch('/blog/post/update', VerifyToken, UpdateBlog)
+// Get all blogs for admin and voluenteer in paginated 
+Routes.get('/blogs/all/paginated', VerifyToken, GetAllPostPaginated)
+// Delete blog post by admin
+Routes.delete('/blog/delete', VerifyToken, DeletePost)
 
 
 export { Routes }

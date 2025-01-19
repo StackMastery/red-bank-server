@@ -44,7 +44,7 @@ const GetAllUserPaginated = async (req, res) => {
             ];
         }
 
-        const users = await UserModel.find(query)
+        const users = await UserModel.find(query).sort({createdAt: -1})
             .skip((page - 1) * limit)
             .limit(limit);
 
