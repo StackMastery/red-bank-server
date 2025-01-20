@@ -29,6 +29,14 @@ const BloodDonationSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    recDistrict: {
+        type: String,
+        required: true,
+    },
+    recUpazila: {
+        type: String,
+        required: true,
+    },
     bloodGroupe: {
         type: String,
         required: true,

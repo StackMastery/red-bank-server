@@ -21,7 +21,7 @@ const GetAllPostPaginated = async (req, res) => {
         }       
 
         const totalItems = await BlogModel.countDocuments()
-        const blogs = await BlogModel.find(query)
+        const blogs = await BlogModel.find(query).select('-content')
             .skip((page - 1) * limit)
             .limit(limit)
             .sort({ createdAt: -1 });

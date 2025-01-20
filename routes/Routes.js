@@ -14,6 +14,7 @@ import UpdateBlog from '../controllers/Blog/UpdateBlog.js'
 import GetAllPostPaginated from '../controllers/Blog/GetAllPostPaginated.js'
 import DeletePost from '../controllers/Blog/DeletePost.js'
 import { GetAllStatus } from '../controllers/frontend/AllStatus.js'
+import GetBlogPostFrontend from '../controllers/frontend/GetBlogPostFrontend.js'
 
 const Routes = express.Router()
 
@@ -64,6 +65,8 @@ Routes.get('/blogs/all/paginated', VerifyToken, GetAllPostPaginated)
 Routes.delete('/blog/delete', VerifyToken, DeletePost)
 // Get Status 
 Routes.get('/status/all', GetAllStatus)
+// get blog post for home
+Routes.get('/blog/post/all', GetBlogPostFrontend)
 
 
 export { Routes }

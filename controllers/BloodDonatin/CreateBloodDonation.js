@@ -12,13 +12,15 @@ const CreateBloodDonation = async (req, res) => {
         hospitalName,
         recEmail,
         recName,
+        recUpazila,
+        recDistrict,
         bloodGroupe,
     } = req.body;
 
     const requiredFields = [
         authorEmail, authorName, donationDate, donationMsg, 
         donationTime, fullAddress, hospitalName, recEmail, 
-        recName, bloodGroupe
+        recName, bloodGroupe, recDistrict, recUpazila,
     ];
     
     if (requiredFields.some(field => !field)) {
@@ -43,6 +45,8 @@ const CreateBloodDonation = async (req, res) => {
             hospitalName,
             recEmail,
             recName,
+            recDistrict,
+            recUpazila,
             bloodGroupe,
         });
         const donation = await newDonation.save();

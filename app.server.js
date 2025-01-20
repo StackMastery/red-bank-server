@@ -21,7 +21,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(cookieParser())
-// app.use(VerifyOrigin)
+app.use(VerifyOrigin)
 
 // Routes
 app.use('/api', Routes)
