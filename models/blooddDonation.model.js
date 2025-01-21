@@ -53,6 +53,9 @@ const BloodDonationSchema = new mongoose.Schema({
         type: String,
         required: true,
     },
+    authorAvatar:{
+        type: String,
+    },
     donorEmail:{
         type: String,
     },

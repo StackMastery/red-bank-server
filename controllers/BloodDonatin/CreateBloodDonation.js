@@ -15,6 +15,7 @@ const CreateBloodDonation = async (req, res) => {
         recUpazila,
         recDistrict,
         bloodGroupe,
+        authorAvatar,
     } = req.body;
 
     const requiredFields = [
@@ -47,6 +48,7 @@ const CreateBloodDonation = async (req, res) => {
             recName,
             recDistrict,
             recUpazila,
+            authorAvatar,
             bloodGroupe,
         });
         const donation = await newDonation.save();

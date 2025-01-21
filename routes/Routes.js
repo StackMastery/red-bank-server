@@ -15,6 +15,7 @@ import GetAllPostPaginated from '../controllers/Blog/GetAllPostPaginated.js'
 import DeletePost from '../controllers/Blog/DeletePost.js'
 import { GetAllStatus } from '../controllers/frontend/AllStatus.js'
 import GetBlogPostFrontend from '../controllers/frontend/GetBlogPostFrontend.js'
+import GetBloodDonation from '../controllers/BloodDonatin/GetBloodDonation.js'
 
 const Routes = express.Router()
 
@@ -67,6 +68,8 @@ Routes.delete('/blog/delete', VerifyToken, DeletePost)
 Routes.get('/status/all', GetAllStatus)
 // get blog post for home
 Routes.get('/blog/post/all', GetBlogPostFrontend)
+// Get Post details for user 
+Routes.get('/donation/details/single', VerifyToken, GetBloodDonation)
 
 
 export { Routes }
