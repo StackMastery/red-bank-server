@@ -16,6 +16,7 @@ import DeletePost from '../controllers/Blog/DeletePost.js'
 import { GetAllStatus } from '../controllers/frontend/AllStatus.js'
 import GetBlogPostFrontend from '../controllers/frontend/GetBlogPostFrontend.js'
 import GetBloodDonation from '../controllers/BloodDonatin/GetBloodDonation.js'
+import GetAllDonors from '../controllers/frontend/GetAllDonors.js'
 
 const Routes = express.Router()
 
@@ -70,6 +71,8 @@ Routes.get('/status/all', GetAllStatus)
 Routes.get('/blog/post/all', GetBlogPostFrontend)
 // Get Post details for user 
 Routes.get('/donation/details/single', VerifyToken, GetBloodDonation)
+// Get all donors data
+Routes.post('/all/donors', GetAllDonors)
 
 
 export { Routes }

@@ -71,7 +71,7 @@ const UpdateDonationRequest = async (req, res) => {
         const updatedDonation = await BloodDonation.findByIdAndUpdate(
             id, 
             { ...req.body },
-            { new: true }
+            { new: true, upsert: true }
         );
 
         if (!updatedDonation) {
