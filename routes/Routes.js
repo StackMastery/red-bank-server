@@ -17,6 +17,7 @@ import { GetAllStatus } from '../controllers/frontend/AllStatus.js'
 import GetBlogPostFrontend from '../controllers/frontend/GetBlogPostFrontend.js'
 import GetBloodDonation from '../controllers/BloodDonatin/GetBloodDonation.js'
 import GetAllDonors from '../controllers/frontend/GetAllDonors.js'
+import SubscribeController from '../controllers/frontend/subscribe.controller.js'
 
 const Routes = express.Router()
 
@@ -73,6 +74,8 @@ Routes.get('/blog/post/all', GetBlogPostFrontend)
 Routes.get('/donation/details/single', VerifyToken, GetBloodDonation)
 // Get all donors data
 Routes.post('/all/donors', GetAllDonors)
+// Email subscribe
+Routes.post('/subscribe/email', SubscribeController)
 
 
 export { Routes }
