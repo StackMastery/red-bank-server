@@ -12,7 +12,6 @@ const VerifyOrigin = (req, res, next) => {
       return res.status(403).send("Unauthorized Request");
     }
   } catch (error) {
-    console.error("Error verifying origin:", error);
     return res.status(500).send("Internal Server Error");
   }
 };

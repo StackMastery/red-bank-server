@@ -28,14 +28,12 @@ const UpdateBlog = async (req, res) => {
 
         return res.send({ success: true, data: updatedBlog });
       } catch (err) {
-        console.error(err);
         return res.status(500).send({ error: "Error updating the blog" });
       }
     } else {
       return res.status(403).send({ error: "Unauthorized user" });
     }
   } catch (err) {
-    console.error(err);
     return res.status(500).send({ error: "Error verifying user" });
   }
 };

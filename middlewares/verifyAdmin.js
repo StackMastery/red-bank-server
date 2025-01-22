@@ -5,7 +5,6 @@ const VerifyAdmin = async (uid) => {
     const adminDetails = await UserModel.findOne({ uid });
     return adminDetails?.role === "admin";
   } catch (err) {
-    console.error("Error verifying admin:", err);
     return false;
   }
 };

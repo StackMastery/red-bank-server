@@ -63,7 +63,6 @@ const UpdateUserRole = async (req, res) => {
 
     res.send({ success: true });
   } catch (err) {
-    console.error(err);
     res.status(500).send({ error: "Internal server error" });
   }
 };
@@ -95,7 +94,6 @@ const UpdateUserStatus = async (req, res) => {
 
     res.send({ success: true });
   } catch (err) {
-    console.error(err);
     res.status(500).send({ error: "Internal server error" });
   }
 };

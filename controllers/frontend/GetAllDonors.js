@@ -26,7 +26,6 @@ const GetAllDonors = async (req, res) => {
       donors,
     });
   } catch (err) {
-    console.error(err);
     res.json({ error: "Something went wrong" }, 500);
   }
 };
