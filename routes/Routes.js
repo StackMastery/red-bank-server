@@ -47,7 +47,7 @@ Routes.get('/dashboard/overview/admin', VerifyToken, DashboardOverview)
 // Get all users for admin
 Routes.get('/dashboard/users/all', VerifyToken, GetAllUserPaginated)
 // Get all donation for admin
-Routes.get('/dashboard/donations/all', VerifyToken, GetAllDonationReqPaginated)
+Routes.get('/dashboard/donations/all', GetAllDonationReqPaginated)
 // Logout
 Routes.post(`/auth/logout`, ClearCookie)
 // update user role by admin

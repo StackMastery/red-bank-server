@@ -65,13 +65,20 @@ const GetAllUserPaginated = async (req, res) => {
 const GetAllDonationReqPaginated = async (req, res) => {
     const page = parseInt(req.query?.page, 10) || 1;
     const limit = parseInt(req.query?.limit, 10) || 10;
+    const status = req.query?.status
 
     if (page <= 0 || limit <= 0) {
         return res.status(400).send({ error: "Valid page and limit are required" });
     }
 
     try {
-        const donations = await BloodDonation.find()
+
+        const query = {};
+        if (status) {
+            query.status = status
+        }
+
+        const donations = await BloodDonation.find(query)
             .skip((page - 1) * limit)
             .limit(limit)
             .exec();
