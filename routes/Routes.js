@@ -33,6 +33,10 @@ import GetBlogPostFrontend from "../controllers/frontend/GetBlogPostFrontend.js"
 import GetBloodDonation from "../controllers/BloodDonatin/GetBloodDonation.js";
 import GetAllDonors from "../controllers/frontend/GetAllDonors.js";
 import SubscribeController from "../controllers/frontend/subscribe.controller.js";
+import {
+  ConfirmAndSaveFund,
+  CreateStripePayment,
+} from "../controllers/Payment/Stripe.js";
 
 const Routes = express.Router();
 
@@ -91,5 +95,8 @@ Routes.get("/donation/details/single", VerifyToken, GetBloodDonation);
 Routes.post("/all/donors", GetAllDonors);
 // Email subscribe
 Routes.post("/subscribe/email", SubscribeController);
+// Create Stripe Payment
+Routes.post("/funding/create/stripe", VerifyToken, CreateStripePayment);
+Routes.post("/funding/save/stripe", VerifyToken, ConfirmAndSaveFund);
 
 export { Routes };
