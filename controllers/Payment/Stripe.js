@@ -29,7 +29,7 @@ const CreateStripePayment = async (req, res) => {
 
 const ConfirmAndSaveFund = async (req, res) => {
   try {
-    const { paymentIntentId, amount, note, customer, avatar } = req.body;
+    const { paymentIntentId, ammount, note, customer, avatar } = req.body;
 
     const paymentIntent = await stripe.paymentIntents.retrieve(paymentIntentId);
 
@@ -40,7 +40,7 @@ const ConfirmAndSaveFund = async (req, res) => {
       name: customer,
       avatar: avatar,
       note: note,
-      ammount: parseInt(amount) || 0,
+      ammount: parseInt(ammount) || 0,
     });
 
     const fund = await newFund.save();

@@ -1,16 +1,30 @@
 import VerifyAdmin from "../../middlewares/verifyAdmin.js";
 import BloodDonation from "../../models/blooddDonation.model.js";
 import { UserModel } from "../../models/user.model.js";
+import FundModel from "../../models/fund.model.js";
 
 const DashboardOverview = async (req, res) => {
   const { uid } = req.query;
   try {
     const countTotalDonors = await UserModel.countDocuments({ role: "donor" });
+    const countTotalFunding = await FundModel.aggregate([
+      {
+        $group: {
+          _id: null,
+          totalFund: { $sum: "$ammount" },
+        },
+      },
+    ]);
+
     const countDonationReq = await BloodDonation.countDocuments();
+
+    const totalFundingAmmount =
+      countTotalFunding.length > 0 ? countTotalFunding[0].totalFund : 0;
 
     res.status(200).send({
       totalDonors: countTotalDonors,
       totalDonationReq: countDonationReq,
+      totalFundingAmmount,
     });
   } catch (err) {
     res.status(500).send({ error: "An error occurred while counting" });

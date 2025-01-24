@@ -40,12 +40,10 @@ const DeleteDonationReq = async (req, res) => {
       data: deleteResult,
     });
   } catch (error) {
-    res
-      .status(500)
-      .send({
-        error: "An error occurred while deleting the donation request",
-        details: error.message,
-      });
+    res.status(500).send({
+      error: "An error occurred while deleting the donation request",
+      details: error.message,
+    });
   }
 };
 
@@ -89,12 +87,10 @@ const UpdateDonationRequest = async (req, res) => {
 
     res.status(200).send(updatedDonation);
   } catch (error) {
-    res
-      .status(500)
-      .send({
-        error: "Failed to update donation record",
-        message: error.message,
-      });
+    res.status(500).send({
+      error: "Failed to update donation record",
+      message: error.message,
+    });
   }
 };
 
@@ -111,6 +107,7 @@ const PaginatedBloodDonation = async (req, res) => {
     const query = req.query.email ? { authorEmail: req.query.email } : {};
 
     const donations = await BloodDonation.find(query)
+      .sort({ createdAt: -1 })
       .skip((page - 1) * limit)
       .limit(limit);
 

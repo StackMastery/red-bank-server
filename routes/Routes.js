@@ -37,6 +37,7 @@ import {
   ConfirmAndSaveFund,
   CreateStripePayment,
 } from "../controllers/Payment/Stripe.js";
+import AllFunds from "../controllers/frontend/AllFunds.js";
 
 const Routes = express.Router();
 
@@ -98,5 +99,7 @@ Routes.post("/subscribe/email", SubscribeController);
 // Create Stripe Payment
 Routes.post("/funding/create/stripe", VerifyToken, CreateStripePayment);
 Routes.post("/funding/save/stripe", VerifyToken, ConfirmAndSaveFund);
-
+// All Funds page
+Routes.get("/all/funds", AllFunds);
+// Aggregated chart dtaa for dashboard
 export { Routes };
